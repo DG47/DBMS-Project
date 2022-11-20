@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import {ShopComponent} from "./components/shop/shop.component";
 import {FinanceComponent} from "./components/finance/finance.component";
 import {LocationsComponent} from "./components/locations/locations.component";
+import {LandingComponent} from "./components/landing/landing.component";
 
 const routes: Routes = [
-  { path: 'shop', component: FinanceComponent },
-  { path: 'finance', component: ShopComponent },
+  { path: '', component: LandingComponent },
+  { path: 'shop', component: ShopComponent },
+  { path: 'finance', component: FinanceComponent },
   { path: 'locations', component: LocationsComponent }
 ];
 

@@ -1,6 +1,8 @@
 <div class="ctrl-panel">
   <mat-toolbar color="primary">
-    <mat-icon class="main-icon" >directions_car</mat-icon>
+    <button mat-icon-button class="main-icon" (click)="this.router.navigateByUrl('/')">
+      <mat-icon>directions_car</mat-icon>
+    </button>
     <span>Auto Sales</span>
 
     <div class="central-ctrl">
@@ -15,13 +17,13 @@
       </button>
     </div>
 
-    <span class="example-spacer"></span>
+    <span class="spacer"></span>
     <a class="btn-link" href="https://github.com/DG47/DBMS-Project" target="_blank">
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon svgIcon="github-circle"></mat-icon>
-    </button>
+      <button mat-icon-button class="icon">
+        <mat-icon svgIcon="github-circle"></mat-icon>
+      </button>
     </a>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <button mat-icon-button class="icon">
       <mat-icon>share</mat-icon>
     </button>
   </mat-toolbar>

@@ -14,6 +14,9 @@ import { ShopComponent } from './components/shop/shop.component';
 import { FinanceComponent } from './components/finance/finance.component';
 import { LocationsComponent } from './components/locations/locations.component';
 import {HttpClientModule} from '@angular/common/http';
+import { LandingComponent } from './components/landing/landing.component';
+import { VehicleCardComponent } from './components/vehicle-card/vehicle-card.component';
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   declarations: [
@@ -21,7 +24,9 @@ import {HttpClientModule} from '@angular/common/http';
     HeaderComponent,
     ShopComponent,
     FinanceComponent,
-    LocationsComponent
+    LocationsComponent,
+    LandingComponent,
+    VehicleCardComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +37,8 @@ import {HttpClientModule} from '@angular/common/http';
     MatButtonModule,
     MatSidenavModule,
     MatListModule,
-    HttpClientModule
+    HttpClientModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
