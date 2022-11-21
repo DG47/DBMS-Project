@@ -1,17 +1,20 @@
 <mat-card class="card">
   <mat-card-header>
-    <div mat-card-avatar class="header-image"></div>
     <mat-card-title>{{this.vehicle.year + ' - ' + this.vehicle.make + ' ' + this.vehicle.model}}</mat-card-title>
     <mat-card-subtitle>{{this.formatMSRP(this.vehicle.MSRP)}}</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image src="{{'https://cdn.imagin.studio/getImage?customer=uscarsonmillercompany&make=' + this.vehicle.make + '&modelFamily=' + this.vehicle.model}}" alt="Photo of a Shiba Inu">
+  <img mat-card-image src="{{'https://cdn.imagin.studio/getImage?customer=uscarsonmillercompany&angle=01&make=' + this.vehicle.make + '&modelFamily=' + this.vehicle.model}}">
   <mat-card-content>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-      ut labore et dolore magna aliqua. Egestas sed tempus urna et.
-    </p>
+    <h4>Feature Highlights:</h4>
+    <ul>
+      <li>Lorem ipsum dolor sit amet</li>
+      <li>Consectetur adipiscing elit</li>
+      <li>Sed do eiusmod tempor</li>
+      <li>It dolore magna aliqua</li>
+    </ul>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button>BUY NOW</button>
+    <button mat-button *ngIf="!vehicle.sold">BUY NOW</button>
+    <button mat-button color="warn" *ngIf="vehicle.sold" disabled>SOLD</button>
   </mat-card-actions>
 </mat-card>

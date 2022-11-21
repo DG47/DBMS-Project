@@ -1,3 +1,16 @@
-.shop-wrapper {
+.shop-wrapper{
   display: flex;
 }
+
+.catalog-wrapper {
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+.search-wrapper {
+  display: inline-flex;
+  width: 18%;
+  height: calc(100vh - 64px);
+
+}
+

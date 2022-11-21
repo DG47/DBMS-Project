@@ -1,4 +1,8 @@
-
 <div class="shop-wrapper">
-<app-vehicle-card  *ngFor="let vehicle of catalog;" [vehicle]="vehicle"></app-vehicle-card>
+  <div class="search-wrapper">
+    <span>test</span>
+  </div>
+  <div class="catalog-wrapper">
+    <app-vehicle-card *ngFor="let vehicle of catalog;" [vehicle]="vehicle"></app-vehicle-card>
+  </div>
 </div>
