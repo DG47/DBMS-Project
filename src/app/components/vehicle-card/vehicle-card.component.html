@@ -4,7 +4,7 @@
     <mat-card-subtitle><b>{{this.formatMSRP(this.vehicle.price)}}</b> | {{this.formatMileage(this.vehicle.mileage)}} miles</mat-card-subtitle>
     <mat-card-subtitle>{{this.vehicle.vin}}</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image src="{{'https://cdn.imagin.studio/getImage?customer=uscarsonmillercompany&angle=01&make=' + this.vehicle.make + '&modelFamily=' + this.vehicle.model}}">
+  <img mat-card-image style="height: 250px; width:400px;" src="{{'https://cdn.imagin.studio/getImage?customer=uscarsonmillercompany&angle=01&make=' + this.vehicle.make + '&modelFamily=' + this.vehicle.model}}">
   <mat-card-content>
     <h4>Feature Highlights:</h4>
     <ul>

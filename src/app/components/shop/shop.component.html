@@ -3,8 +3,8 @@
     <mat-card class="mat-card-ctrl">
       <mat-card-content>
         <div>
+          <h4>Sort by</h4>
           <mat-form-field>
-            <mat-label>Sort</mat-label>
             <mat-select (selectionChange)="handleFilterChange()" [(value)]="sortBySelected">
               <mat-option *ngFor="let option of sortOptions" [value]="option['value']">
                 {{option['text']}}
@@ -12,6 +12,18 @@
             </mat-select>
           </mat-form-field>
       </div>
+      </mat-card-content>
+      <mat-card-content>
+        <div>
+          <h4>Make</h4>
+          <mat-form-field>
+            <mat-select (selectionChange)="handleFilterChange()" [(value)]="makeSelected">
+              <mat-option *ngFor="let option of makeOptions" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </mat-card-content>
       <mat-card-content>
         <div>
@@ -52,6 +64,14 @@
           <h4>Fuel</h4>
           <mat-button-toggle-group name="fuel" aria-label="fuel" multiple [(ngModel)]="fuelToggle" (change)="handleFilterChange()">
             <mat-button-toggle *ngFor="let option of fuelToggleOptions" value="{{option}}">{{option}}</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </mat-card-content>
+      <mat-card-content>
+        <div>
+          <h4>Dealership Location</h4>
+          <mat-button-toggle-group name="fuel" aria-label="fuel" multiple [(ngModel)]="dealershipToggle" (change)="handleFilterChange()">
+            <mat-button-toggle *ngFor="let option of dealershipToggleOptions" value="{{option.id}}">{{option.address_city}}</mat-button-toggle>
           </mat-button-toggle-group>
         </div>
       </mat-card-content>

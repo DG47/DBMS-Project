@@ -11,7 +11,6 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
-
   get(): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.domain);
   }

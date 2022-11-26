@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Inventory} from "../model/inventory.model";
 import {Observable} from "rxjs";
@@ -10,10 +10,11 @@ export class InventoryService {
 
   domain: string = "http://localhost:8080/inventory";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
 
-  get(pageIndex: number, pageSize: number, minPrice: number, maxPrice: number, minMileage: number, maxMileage:number, transmissionToggle: string[], driveToggle: string[], fuelToggle: string[], sortBy: string, sortDir: string): Observable<Inventory[]> {
+  get(pageIndex: number, pageSize: number, minPrice: number, maxPrice: number, minMileage: number, maxMileage: number, transmissionToggle: string[], driveToggle: string[], fuelToggle: string[], dealershipToggle: string[], sortBy: string, sortDir: string, make: string): Observable<Inventory[]> {
     let params = new HttpParams();
     params = params.append('page', pageIndex);
     params = params.append('size', pageSize);
@@ -24,13 +25,16 @@ export class InventoryService {
     params = params.append('transmissionToggle', transmissionToggle.toString());
     params = params.append('driveToggle', driveToggle.toString());
     params = params.append('fuelToggle', fuelToggle.toString());
+    params = params.append('dealershipToggle', dealershipToggle.toString());
     params = params.append('sortBy', sortBy);
     params = params.append('sortDir', sortDir);
-    console.log(sortDir);
+    params = params.append('make', make);
     return this.http.get<Inventory[]>(this.domain, {params: params});
   }
 
-
+  getMakes(): Observable<string[]> {
+    return this.http.get<string[]>(this.domain + "/makes");
+  }
 
   getById(id: string): Observable<Inventory> {
     return this.http.get<Inventory>(this.domain + "/" + id);
