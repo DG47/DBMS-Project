@@ -1,6 +1,55 @@
 <div class="shop-wrapper">
   <div class="search-wrapper">
-    <span>Hold for search and filter</span>
+    <mat-card class="mat-card-ctrl">
+      <mat-card-content>
+        <div>
+          <h4>Price</h4>
+          <mat-slider min="1000" max="150000" step="1000" discrete [displayWith]="formatLabel">
+            <input value="1000" matSliderStartThumb>
+            <input value="150000" matSliderEndThumb>
+          </mat-slider>
+        </div>
+      </mat-card-content>
+      <mat-card-content>
+        <div>
+          <h4>Milage</h4>
+          <mat-slider min="0" max="200000" step="1000" discrete [displayWith]="formatLabel">
+            <input value="0" matSliderStartThumb>
+            <input value="200000" matSliderEndThumb>
+          </mat-slider>
+        </div>
+      </mat-card-content>
+      <mat-card-content>
+        <div>
+          <h4>Transmission</h4>
+          <mat-button-toggle-group name="transmission" aria-label="transmission" multiple>
+            <mat-button-toggle value="Automatic">Automatic</mat-button-toggle>
+            <mat-button-toggle value="CVT">CVT</mat-button-toggle>
+            <mat-button-toggle value="Manual">Manual</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </mat-card-content>
+      <mat-card-content>
+        <div>
+          <h4>Drive</h4>
+          <mat-button-toggle-group name="drive" aria-label="drive" multiple>
+            <mat-button-toggle value="2WD">2WD</mat-button-toggle>
+            <mat-button-toggle value="4WD">4WD</mat-button-toggle>
+            <mat-button-toggle value="AWD">AWD</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </mat-card-content>
+      <mat-card-content>
+        <div>
+          <h4>Fuel</h4>
+          <mat-button-toggle-group name="fuel" aria-label="fuel" multiple>
+            <mat-button-toggle value="Gasoline">Gasoline</mat-button-toggle>
+            <mat-button-toggle value="Diesel">Diesel</mat-button-toggle>
+            <mat-button-toggle value="Electric">Electric</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </div>
   <div class="catalog-wrapper">
     <app-vehicle-card *ngFor="let vehicle of catalog;" [vehicle]="vehicle"></app-vehicle-card>

@@ -1,16 +1,17 @@
 <mat-card class="card">
   <mat-card-header>
-    <mat-card-title>{{this.vehicle.year + ' - ' + this.vehicle.make + ' ' + this.vehicle.model}}</mat-card-title>
-    <mat-card-subtitle>{{this.formatMSRP(this.vehicle.MSRP)}}</mat-card-subtitle>
+    <mat-card-title>{{this.vehicle.model_year + ' - ' + this.vehicle.make + ' ' + this.vehicle.model}}</mat-card-title>
+    <mat-card-subtitle><b>{{this.formatMSRP(this.vehicle.price)}}</b> | {{this.formatMileage(this.vehicle.mileage)}} miles</mat-card-subtitle>
+    <mat-card-subtitle>{{this.vehicle.vin}}</mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image src="{{'https://cdn.imagin.studio/getImage?customer=uscarsonmillercompany&angle=01&make=' + this.vehicle.make + '&modelFamily=' + this.vehicle.model}}">
   <mat-card-content>
     <h4>Feature Highlights:</h4>
     <ul>
-      <li>Lorem ipsum dolor sit amet</li>
-      <li>Consectetur adipiscing elit</li>
-      <li>Sed do eiusmod tempor</li>
-      <li>It dolore magna aliqua</li>
+      <li><b>Color: </b>{{this.vehicle.color}}</li>
+      <li><b>Power Train: </b>{{this.vehicle.engine}}</li>
+      <li><b>Transmission: </b>{{this.vehicle.transmission}}</li>
+      <li><b>Drive: </b>{{this.vehicle.drive}}</li>
     </ul>
   </mat-card-content>
   <mat-card-actions>

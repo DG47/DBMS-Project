@@ -6,7 +6,7 @@ import {LocationsComponent} from "./components/locations/locations.component";
 import {LandingComponent} from "./components/landing/landing.component";
 
 const routes: Routes = [
-  { path: '', component: LandingComponent },
+  { path: '', component: ShopComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'finance', component: FinanceComponent },
   { path: 'locations', component: LocationsComponent }

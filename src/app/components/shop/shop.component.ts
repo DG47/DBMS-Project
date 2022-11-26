@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {InventoryService} from "../../service/inventory.service";
+import {Inventory} from "../../core/model/inventory.model";
 
 @Component({
   selector: 'app-shop',
@@ -6,12 +8,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent {
-  catalog: any = [
-    {"id": "123", "year": 2015, "make": "Honda", "model": "CRV", "MSRP": 19000, "sold": false},
-    {"id": "345", "year": 2017, "make": "Chrysler", "model": "300", "MSRP": 25000, "sold": true},
-    {"id": "678", "year": 2015, "make": "Audi", "model": "S8", "MSRP": 14000, "sold": false},
-    {"id": "678", "year": 2021, "make": "Audi", "model": "R8", "MSRP": 90000, "sold": false}, {"id": "678", "year": 2015, "make": "BMW", "model": "M3", "MSRP": 55500, "sold": false},
-    {"id": "678", "year": 2015, "make": "Jeep", "model": "Wrangler", "MSRP": 30000, "sold": false},
-  ]
+  catalog: Inventory[] | undefined;
+
+
+  constructor(private inventory: InventoryService) {
+    this.inventory.get().subscribe((data: Inventory[]) => this.catalog = data);
+  }
+
+  formatLabel(value: number): string {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    return `${value}`;
+  }
+
 
 }

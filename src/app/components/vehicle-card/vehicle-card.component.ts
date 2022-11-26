@@ -17,4 +17,9 @@ export class VehicleCardComponent {
   public formatMSRP(MSRP: number): String {
     return formatCurrency(MSRP, 'en-US', '$');
   }
+
+  public formatMileage(milage: number): String {
+    return milage.toLocaleString("en-US");
+  }
+
 }

@@ -17,6 +17,8 @@ import {HttpClientModule} from '@angular/common/http';
 import { LandingComponent } from './components/landing/landing.component';
 import { VehicleCardComponent } from './components/vehicle-card/vehicle-card.component';
 import {MatCardModule} from "@angular/material/card";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatSliderModule} from "@angular/material/slider";
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import {MatCardModule} from "@angular/material/card";
     MatSidenavModule,
     MatListModule,
     HttpClientModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonToggleModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

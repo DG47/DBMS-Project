@@ -3,6 +3,7 @@
 .catalog-wrapper {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .search-wrapper {
@@ -11,3 +12,17 @@
   padding: 10px;
 }
 
+.mat-card-ctrl {
+  margin: 0 auto;
+  display: inline;
+}
+
+
+mat-card-content {
+  display: inline-flex;;
+  margin: auto;
+}
+
+mat-slider {
+  min-width: 8vw;
+}

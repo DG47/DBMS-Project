@@ -1,12 +1,10 @@
 <div class="ctrl-panel">
   <mat-toolbar color="primary">
-    <button mat-icon-button class="main-icon" (click)="this.router.navigateByUrl('/')">
-      <mat-icon>directions_car</mat-icon>
-    </button>
+    <mat-icon class="main-icon">directions_car</mat-icon>
     <span>Auto Sales</span>
 
     <div class="central-ctrl">
-      <button class="central-ctrl-btn" (click)="this.router.navigateByUrl('/shop')" mat-button>
+      <button class="central-ctrl-btn" (click)="this.router.navigateByUrl('/')" mat-button>
         Shop
       </button>
       <button class="central-ctrl-btn" (click)="this.router.navigateByUrl('/finance')" mat-button>
@@ -27,6 +25,4 @@
       <mat-icon>share</mat-icon>
     </button>
   </mat-toolbar>
-
-
 </div>
