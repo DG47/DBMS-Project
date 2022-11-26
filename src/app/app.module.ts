@@ -19,6 +19,9 @@ import { VehicleCardComponent } from './components/vehicle-card/vehicle-card.com
 import {MatCardModule} from "@angular/material/card";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatSliderModule} from "@angular/material/slider";
+import {FormsModule} from "@angular/forms";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -42,7 +45,10 @@ import {MatSliderModule} from "@angular/material/slider";
     HttpClientModule,
     MatCardModule,
     MatButtonToggleModule,
-    MatSliderModule
+    MatSliderModule,
+    FormsModule,
+    MatPaginatorModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

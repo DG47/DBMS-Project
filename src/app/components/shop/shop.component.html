@@ -3,55 +3,73 @@
     <mat-card class="mat-card-ctrl">
       <mat-card-content>
         <div>
+          <mat-form-field>
+            <mat-label>Sort</mat-label>
+            <mat-select (selectionChange)="handleFilterChange()" [(value)]="sortBySelected">
+              <mat-option *ngFor="let option of sortOptions" [value]="option['value']">
+                {{option['text']}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+      </mat-card-content>
+      <mat-card-content>
+        <div>
           <h4>Price</h4>
-          <mat-slider min="1000" max="150000" step="1000" discrete [displayWith]="formatLabel">
-            <input value="1000" matSliderStartThumb>
-            <input value="150000" matSliderEndThumb>
+          <mat-slider min="1000" max="150000" step="1000" discrete [displayWith]="formatLabel" (change)="handleFilterChange()">
+            <input matSliderStartThumb [(ngModel)]="minPrice">
+            <input  matSliderEndThumb [(ngModel)]="maxPrice">
           </mat-slider>
         </div>
       </mat-card-content>
       <mat-card-content>
         <div>
-          <h4>Milage</h4>
-          <mat-slider min="0" max="200000" step="1000" discrete [displayWith]="formatLabel">
-            <input value="0" matSliderStartThumb>
-            <input value="200000" matSliderEndThumb>
+          <h4>Mileage</h4>
+          <mat-slider min="0" max="200000" step="1000" discrete [displayWith]="formatLabel" (change)="handleFilterChange()">
+            <input matSliderStartThumb [(ngModel)]="minMileage">
+            <input matSliderEndThumb [(ngModel)]="maxMileage">
           </mat-slider>
         </div>
       </mat-card-content>
       <mat-card-content>
         <div>
           <h4>Transmission</h4>
-          <mat-button-toggle-group name="transmission" aria-label="transmission" multiple>
-            <mat-button-toggle value="Automatic">Automatic</mat-button-toggle>
-            <mat-button-toggle value="CVT">CVT</mat-button-toggle>
-            <mat-button-toggle value="Manual">Manual</mat-button-toggle>
+          <mat-button-toggle-group name="transmission" aria-label="transmission" multiple [(ngModel)]="transmissionToggle" (change)="handleFilterChange()">
+            <mat-button-toggle *ngFor="let option of transmissionToggleOptions" value="{{option}}">{{option}}</mat-button-toggle>
           </mat-button-toggle-group>
         </div>
       </mat-card-content>
       <mat-card-content>
         <div>
           <h4>Drive</h4>
-          <mat-button-toggle-group name="drive" aria-label="drive" multiple>
-            <mat-button-toggle value="2WD">2WD</mat-button-toggle>
-            <mat-button-toggle value="4WD">4WD</mat-button-toggle>
-            <mat-button-toggle value="AWD">AWD</mat-button-toggle>
+          <mat-button-toggle-group name="drive" aria-label="drive" multiple [(ngModel)]="driveToggle" (change)="handleFilterChange()">
+            <mat-button-toggle *ngFor="let option of driveToggleOptions" value="{{option}}">{{option}}</mat-button-toggle>
           </mat-button-toggle-group>
         </div>
       </mat-card-content>
       <mat-card-content>
         <div>
           <h4>Fuel</h4>
-          <mat-button-toggle-group name="fuel" aria-label="fuel" multiple>
-            <mat-button-toggle value="Gasoline">Gasoline</mat-button-toggle>
-            <mat-button-toggle value="Diesel">Diesel</mat-button-toggle>
-            <mat-button-toggle value="Electric">Electric</mat-button-toggle>
+          <mat-button-toggle-group name="fuel" aria-label="fuel" multiple [(ngModel)]="fuelToggle" (change)="handleFilterChange()">
+            <mat-button-toggle *ngFor="let option of fuelToggleOptions" value="{{option}}">{{option}}</mat-button-toggle>
           </mat-button-toggle-group>
         </div>
       </mat-card-content>
     </mat-card>
   </div>
-  <div class="catalog-wrapper">
-    <app-vehicle-card *ngFor="let vehicle of catalog;" [vehicle]="vehicle"></app-vehicle-card>
+    <div class="catalog-wrapper">
+      <app-vehicle-card *ngFor="let vehicle of content;" [vehicle]="vehicle"></app-vehicle-card>
+    </div>
+  <div class="paginator-wrapper">
+    <mat-paginator #paginator
+                   (page)="handlePageEvent($event)"
+                   [length]="length"
+                   [pageSize]="pageSize"
+                   [showFirstLastButtons]="true"
+                   [pageSizeOptions]="pageSizeOptions"
+                   [pageIndex]="pageIndex"
+                   class="mat-paginator-shop">
+    </mat-paginator>
   </div>
+  <h2 *ngIf="content.length == 0" class="no-found-span">No vehicles available for given specifications...</h2>
 </div>

@@ -8,8 +8,12 @@
 
 .search-wrapper {
   display: flex;
-  width: 100%;
   padding: 10px;
+}
+.paginator-wrapper {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
 }
 
 .mat-card-ctrl {
@@ -19,10 +23,17 @@
 
 
 mat-card-content {
-  display: inline-flex;;
+  display: inline-flex;
   margin: auto;
 }
 
 mat-slider {
   min-width: 8vw;
 }
+
+.no-found-span {
+  margin: 0 auto;
+  font-style: italic;
+}
+
+
