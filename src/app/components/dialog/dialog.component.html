@@ -1,0 +1,89 @@
+<mat-card class="dialog-card">
+<mat-stepper orientation="vertical" [linear]="false" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Fill out personal information</ng-template>
+      <br><h3>Name and address</h3>
+      <mat-form-field appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstNameCtrl" required>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastNameCtrl" required>
+      </mat-form-field><br>
+      <mat-form-field appearance="fill" style="width: calc(100% - 10px)">
+        <mat-label>Street Address</mat-label>
+        <input matInput formControlName="streetCtrl" required>
+      </mat-form-field><br>
+      <mat-form-field appearance="fill">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="cityCtrl" required>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>State</mat-label>
+        <input matInput  formControlName="stateCtrl" required>
+      </mat-form-field><br>
+      <mat-form-field appearance="fill">
+        <mat-label>Zip Code</mat-label>
+        <input matInput formControlName="zipCtrl" required>
+      </mat-form-field><br>
+      <h3>Personal Information</h3>
+      <mat-form-field appearance="fill">
+        <mat-label>Age</mat-label>
+        <input matInput type="number" formControlName="ageCtrl" required>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Income</mat-label>
+        <input matInput type="number" formControlName="incomeCtrl" required>
+      </mat-form-field><br>
+      <mat-form-field>
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="genderCtrl">
+          <mat-option *ngFor="let option of genderOptions" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Fill out your payment information</ng-template>
+      <h2>{{this.vehicle.model_year + ' - ' + this.vehicle.make + ' ' + this.vehicle.model}}</h2>
+      <h3>{{this.formatMSRP(this.vehicle.price)}}</h3>
+      <mat-form-field>
+        <mat-label>Who helped you with your sales today?</mat-label>
+        <mat-select formControlName="salesPersonCtrl">
+          <mat-option *ngFor="let option of salesPerson" [value]="option['dealershipId']">
+            {{option['name']}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field><br>
+      <mat-form-field appearance="fill">
+        <mat-label>Trade-in Value</mat-label>
+        <input matInput type="number" formControlName="tradeInCtrl" [(ngModel)]="tradeIn" >
+      </mat-form-field><br>
+      <mat-form-field appearance="fill">
+        <mat-label>Down Payment</mat-label>
+        <input matInput type="number" formControlName="downPaymentCtrl" [(ngModel)]="downPayment">
+      </mat-form-field><br>
+      <h3>Balance remaining {{this.formatRemaining(this.vehicle.price - this.tradeIn - this.downPayment)}}</h3>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Finance your {{this.vehicle.model_year + ' - ' + this.vehicle.make + ' ' + this.vehicle.model}}</ng-template>
+      <h3>Payment remaining {{this.formatRemaining(this.vehicle.price - this.tradeIn - this.downPayment)}}</h3>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="submitSale()">Submit</button>
+    </div>
+  </mat-step>
+</mat-stepper>
+</mat-card>

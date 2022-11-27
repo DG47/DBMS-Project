@@ -12,4 +12,6 @@ export interface Inventory {
   drive:string,
   fuel:string,
   sold: boolean
+  invoice_date?: Date,
+  dealershipId: number
 }

@@ -31,4 +31,7 @@ export class SalesService {
     return this.http.delete(this.domain + "/" + id);
   }
 
+  getSalesPerson(id: string): Observable<any> {
+    return this.http.get(this.domain + "person/" + id);
+  }
 }

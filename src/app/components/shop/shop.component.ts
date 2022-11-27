@@ -5,6 +5,10 @@ import {min} from "rxjs";
 import {PageEvent} from "@angular/material/paginator";
 import {DealershipService} from "../../core/service/dealership.service";
 import {Dealership} from "../../core/model/dealership.model";
+import {ActivatedRoute} from "@angular/router";
+import {DialogComponent} from "../dialog/dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {InventoryDialogComponent} from "../inventory-dialog/inventory-dialog.component";
 
 @Component({
   selector: 'app-shop',
@@ -12,6 +16,8 @@ import {Dealership} from "../../core/model/dealership.model";
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent {
+  admin:boolean = false;
+
   content: Inventory[] = [];
   page: Inventory[] = [];
 
@@ -50,24 +56,30 @@ export class ShopComponent {
   fuelToggle: string[] = [];
   fuelToggleOptions: string[] = ["Gasoline", "Diesel", "Electric"];
   dealershipToggle: string[] = [];
-  dealershipToggleOptions: any = []
+  dealershipToggleOptions: any = [];
 
 
 
 
-  constructor(private inventory: InventoryService, private dealership: DealershipService) {
-    this.inventory.getMaxPrice().subscribe(max => { console.log(max); this.maxPriceLimit = max; this.maxPrice = max; });
-    this.inventory.getMaxMileage().subscribe(max => { console.log(max); this.maxMileageLimit = max; this.maxMileage = max; });
+  constructor(private inventory: InventoryService, private dealership: DealershipService, private activatedRoute: ActivatedRoute, public dialog: MatDialog) {
+  }
+
+  ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.admin = params['admin'] != undefined ? true : false;
+      console.log(this.admin);
+    });
+    this.inventory.getMaxPrice().subscribe(max => { this.maxPriceLimit = max; this.maxPrice = max; });
+    this.inventory.getMaxMileage().subscribe(max => { this.maxMileageLimit = max; this.maxMileage = max; });
     this.dealership.get().subscribe(data => {
       this.dealershipToggleOptions = data;
-      console.log(data)
       this.getData();
     });
     this.inventory.getMakes().subscribe(data => {
       this.makeOptions = data
       this.makeOptions.unshift('All');
       this.makeSelected = 'All';
-    });
+    })
 
   }
 
@@ -76,7 +88,6 @@ export class ShopComponent {
     this.length = e.length;
     this.pageSize = e.pageSize;
     this.getData();
-    console.log(e)
   }
 
   handleFilterChange() {
@@ -96,7 +107,7 @@ export class ShopComponent {
     let driveToggle = (this.driveToggle.length == 0) ? this.driveToggleOptions : this.driveToggle;
     let fuelToggle = (this.fuelToggle.length == 0) ? this.fuelToggleOptions : this.fuelToggle;
     let dealershipToggle = (this.dealershipToggle.length == 0) ? this.dealershipToggleOptions.map((data: Dealership) => data.id) : this.dealershipToggle;
-    console.log(dealershipToggle)
+
     let sortBy = this.sortBySelected.split(',')[0];
     let sortDir = this.sortBySelected.split(',')[1];
 
@@ -106,5 +117,17 @@ export class ShopComponent {
       this.length = data.totalElements;
     });
   }
+
+  openInventoryDialog(): void {
+    const dialogRef = this.dialog.open(InventoryDialogComponent, {
+      width: 'auto',
+      data: { 'dealshipToggleOptions': this.dealershipToggleOptions, 'edit': false }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
 
 }

@@ -1,0 +1,81 @@
+<mat-card class="dialog-card">
+  <mat-card-content>
+  <form [formGroup]="firstFormGroup">
+    <h2 *ngIf="!setting.edit">New Vehicle Inventory</h2>
+    <h2 *ngIf="setting.edit">Edit Vehicle Inventory</h2>
+    <mat-form-field appearance="fill" class="full-mat-input">
+      <mat-label>VIN</mat-label>
+      <input matInput formControlName="vinCtrl" [readonly]="setting.edit" required>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Make</mat-label>
+      <input matInput formControlName="makeCtrl" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Model</mat-label>
+      <input matInput formControlName="modelCtrl" required>
+    </mat-form-field><br>
+    <mat-form-field appearance="fill">
+      <mat-label>Model Year</mat-label>
+      <input matInput formControlName="modelYearCtrl" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Type</mat-label>
+      <input matInput formControlName="typeCtrl" required>
+    </mat-form-field><br>
+    <mat-form-field appearance="fill">
+      <mat-label>Engine Type</mat-label>
+      <input matInput formControlName="engineCtrl" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Color</mat-label>
+      <input matInput formControlName="colorCtrl" required>
+    </mat-form-field><br>
+    <mat-form-field appearance="fill">
+      <mat-label>Mileage</mat-label>
+      <input matInput formControlName="mileageCtrl" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Price</mat-label>
+      <input matInput formControlName="priceCtrl" required>
+    </mat-form-field><br>
+    <mat-form-field>
+      <mat-label>Transmission</mat-label>
+      <mat-select formControlName="transmissionCtrl">
+        <mat-option *ngFor="let option of transmissionToggleOptions" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Drive</mat-label>
+      <mat-select formControlName="driveCtrl">
+        <mat-option *ngFor="let option of driveToggleOptions" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field><br>
+    <mat-form-field>
+      <mat-label>Fuel</mat-label>
+      <mat-select formControlName="fuelCtrl">
+        <mat-option *ngFor="let option of fuelToggleOptions" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Dealership</mat-label>
+      <mat-select formControlName="dealerCtrl">
+        <mat-option *ngFor="let option of dealershipToggleOptions" [value]="option.id">
+          {{option.address_city}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+    <div>
+      <button mat-raised-button color="primary" (click)="submit()" *ngIf="!setting.edit">Submit</button>
+      <button mat-raised-button color="primary" (click)="update()" *ngIf="setting.edit">Update</button>
+    </div>
+  </mat-card-content>
+</mat-card>

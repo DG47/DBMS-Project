@@ -1,0 +1,14 @@
+.dialog-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+mat-form-field {
+  margin: 5px;
+}
+
+.full-mat-input {
+  width: calc(100% - 10px);
+}

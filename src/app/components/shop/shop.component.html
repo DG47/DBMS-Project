@@ -75,6 +75,12 @@
           </mat-button-toggle-group>
         </div>
       </mat-card-content>
+    <mat-card-content *ngIf="admin">
+      <div>
+        <h4>Admin Tools</h4>
+        <button mat-raised-button (click)="openInventoryDialog()" color="primary">Add</button>
+      </div>
+    </mat-card-content>
     </mat-card>
   </div>
     <div class="catalog-wrapper">
@@ -95,3 +101,7 @@
   </div>
 
 </div>
+
+
+
+
