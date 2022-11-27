@@ -32,6 +32,14 @@ export class InventoryService {
     return this.http.get<Inventory[]>(this.domain, {params: params});
   }
 
+  getMaxPrice(): Observable<number> {
+    return this.http.get<number>(this.domain + "/maxprice");
+  }
+
+  getMaxMileage(): Observable<number> {
+    return this.http.get<number>(this.domain + "/maxmileage");
+  }
+
   getMakes(): Observable<string[]> {
     return this.http.get<string[]>(this.domain + "/makes");
   }

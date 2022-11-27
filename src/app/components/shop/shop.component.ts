@@ -16,7 +16,7 @@ export class ShopComponent {
   page: Inventory[] = [];
 
   //pages
-  pageSizeOptions: number[] = [10,15,30];
+  pageSizeOptions: number[] = [7,14,21];
   pageSize: number = this.pageSizeOptions[1];
   pageIndex: number = 0;
   length: number = 0;
@@ -36,10 +36,12 @@ export class ShopComponent {
   makeSelected: string = "All";
 
   minPrice: number = 1000;
-  maxPrice: number = 150000;
+  maxPrice: number = 500000;
+  maxPriceLimit: number = 500000;
 
   minMileage: number = 0;
-  maxMileage: number = 200000;
+  maxMileage: number = 500000;
+  maxMileageLimit: number = 500000;
 
   transmissionToggle: string[] = [];
   transmissionToggleOptions: string[] = ["Automatic", "CVT", "Manual"];
@@ -54,6 +56,8 @@ export class ShopComponent {
 
 
   constructor(private inventory: InventoryService, private dealership: DealershipService) {
+    this.inventory.getMaxPrice().subscribe(max => { console.log(max); this.maxPriceLimit = max; this.maxPrice = max; });
+    this.inventory.getMaxMileage().subscribe(max => { console.log(max); this.maxMileageLimit = max; this.maxMileage = max; });
     this.dealership.get().subscribe(data => {
       this.dealershipToggleOptions = data;
       console.log(data)

@@ -28,7 +28,7 @@
       <mat-card-content>
         <div>
           <h4>Price</h4>
-          <mat-slider min="1000" max="150000" step="1000" discrete [displayWith]="formatLabel" (change)="handleFilterChange()">
+          <mat-slider min="1000" [max]="maxPriceLimit" step="1000" discrete [displayWith]="formatLabel" (change)="handleFilterChange()">
             <input matSliderStartThumb [(ngModel)]="minPrice">
             <input  matSliderEndThumb [(ngModel)]="maxPrice">
           </mat-slider>
@@ -37,7 +37,7 @@
       <mat-card-content>
         <div>
           <h4>Mileage</h4>
-          <mat-slider min="0" max="200000" step="1000" discrete [displayWith]="formatLabel" (change)="handleFilterChange()">
+          <mat-slider min="0" [max]="maxMileageLimit" step="1000" discrete [displayWith]="formatLabel" (change)="handleFilterChange()">
             <input matSliderStartThumb [(ngModel)]="minMileage">
             <input matSliderEndThumb [(ngModel)]="maxMileage">
           </mat-slider>
@@ -79,6 +79,7 @@
   </div>
     <div class="catalog-wrapper">
       <app-vehicle-card *ngFor="let vehicle of content;" [vehicle]="vehicle"></app-vehicle-card>
+      <h2 *ngIf="content.length == 0 && makeOptions.length > 0" class="no-found-span">No vehicles available for given specifications...</h2>
     </div>
   <div class="paginator-wrapper">
     <mat-paginator #paginator
@@ -90,6 +91,7 @@
                    [pageIndex]="pageIndex"
                    class="mat-paginator-shop">
     </mat-paginator>
+
   </div>
-  <h2 *ngIf="content.length == 0" class="no-found-span">No vehicles available for given specifications...</h2>
+
 </div>
