@@ -76,6 +76,7 @@
     <div>
       <button mat-raised-button color="primary" (click)="submit()" *ngIf="!setting.edit">Submit</button>
       <button mat-raised-button color="primary" (click)="update()" *ngIf="setting.edit">Update</button>
+      <button mat-stroked-button color="warn" style="margin-left: 10px;" (click)="delete()" *ngIf="setting.edit">Delete</button>
     </div>
   </mat-card-content>
 </mat-card>

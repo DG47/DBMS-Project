@@ -8,3 +8,7 @@
 mat-form-field {
   margin: 5px;
 }
+
+.custom-dialog-container .mat-dialog-container {
+  overflow-y: hidden;
+}

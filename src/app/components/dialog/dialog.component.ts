@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Inventory} from "../../core/model/inventory.model";
-import {FormBuilder, Validators} from "@angular/forms";
+import {FormBuilder,FormControl, Validators, Validator} from "@angular/forms";
 import {formatCurrency} from "@angular/common";
 import {SalesService} from "../../core/service/sales.service";
 import {Customer} from "../../core/model/customer.model";
@@ -41,25 +41,25 @@ export class DialogComponent {
   }
 
   firstFormGroup = this._formBuilder.group({
-    firstNameCtrl: ['', Validators.required],
-    lastNameCtrl: ['', Validators.required],
-    streetCtrl: ['', Validators.required],
-    cityCtrl: ['', Validators.required],
-    stateCtrl: ['', Validators.required],
-    zipCtrl: ['', Validators.required],
-    ageCtrl: ['', Validators.required],
-    incomeCtrl: ['', Validators.required],
-    genderCtrl: ['', Validators.required],
+    firstNameCtrl: new FormControl('', [Validators.required, Validators.pattern("^[A-Za-z]*$")]),
+    lastNameCtrl: new FormControl('', [Validators.required, Validators.pattern("^[A-Za-z]*$")]),
+    streetCtrl: new FormControl('', [Validators.required, Validators.pattern("^[A-Za-z0-9 \\s\\.]*$")]),
+    cityCtrl: new FormControl('', [Validators.required, Validators.pattern("^[A-Za-z]*$")]),
+    stateCtrl: new FormControl('', [Validators.required, Validators.pattern("^[A-Z][A-Z]$")]),
+    zipCtrl: new FormControl('', [Validators.required, Validators.pattern("^[0-9][0-9][0-9][0-9][0-9]$")]),
+    ageCtrl: new FormControl('', [Validators.required]),
+    incomeCtrl: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
+    genderCtrl: new FormControl('', [Validators.required]),
   });
 
   secondFormGroup = this._formBuilder.group({
-    salesPersonCtrl: ['', Validators.required],
-    tradeInCtrl: ['', Validators.required],
-    downPaymentCtrl: ['', Validators.required],
+    salesPersonCtrl: new FormControl('', [Validators.required]),
+    tradeInCtrl: new FormControl('', [Validators.required]),
+    downPaymentCtrl: new FormControl('', [Validators.required]),
   });
 
   thirdFormGroup = this._formBuilder.group({
-    thirdCtrl: ['', Validators.required],
+    thirdCtrl: new FormControl('', [Validators.required]),
   });
 
   onNoClick(): void {
@@ -76,7 +76,7 @@ export class DialogComponent {
 
   public submitSale() {
     let customer: Customer = {
-      first_name: this.firstFormGroup.get('firstNameCtrl')!.value!,
+      first_name: this.firstFormGroup.get('firstNameCtrl')!.get('firstNameCtrl')!.value!,
       last_name: this.firstFormGroup.get('lastNameCtrl')!.value!,
       address_street: this.firstFormGroup.get('streetCtrl')!.value!,
       address_city: this.firstFormGroup.get('cityCtrl')!.value!,

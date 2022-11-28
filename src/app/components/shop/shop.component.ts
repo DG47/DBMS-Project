@@ -119,9 +119,26 @@ export class ShopComponent {
   }
 
   openInventoryDialog(): void {
+    let vehicle: Inventory = {
+      color: "",
+      dealershipId: 0,
+      drive: "",
+      engine: "",
+      fuel: "",
+      make: "",
+      mileage: 0,
+      model: "",
+      model_year: 0,
+      price: 0,
+      sold: false,
+      transmission: "",
+      type: "",
+      vin: ""
+
+    }
     const dialogRef = this.dialog.open(InventoryDialogComponent, {
       width: 'auto',
-      data: { 'dealshipToggleOptions': this.dealershipToggleOptions, 'edit': false }
+      data: { 'dealshipToggleOptions': this.dealershipToggleOptions, 'edit': false, 'vehicle': vehicle }
     });
 
     dialogRef.afterClosed().subscribe(result => {

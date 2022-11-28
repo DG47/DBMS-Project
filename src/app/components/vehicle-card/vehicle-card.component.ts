@@ -52,7 +52,7 @@ export class VehicleCardComponent {
   openInventoryDialog(): void {
     const dialogRef = this.dialog.open(InventoryDialogComponent, {
       width: 'auto',
-      data: { 'dealshipToggleOptions': this.dealershipToggleOptions, 'edit': true, 'vehicle': this.vehicle }
+      data: { 'dealshipToggleOptions': this.dealershipToggleOptions, 'edit': true, 'vehicle': this.vehicle },
     });
 
     dialogRef.afterClosed().subscribe(result => {
