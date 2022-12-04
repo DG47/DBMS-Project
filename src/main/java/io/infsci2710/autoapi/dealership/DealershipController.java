@@ -1,0 +1,39 @@
+package io.infsci2710.autoapi.dealership;
+
+
+import io.infsci2710.autoapi.sales.Sales;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+
+@RestController
+@AllArgsConstructor
+@RequestMapping("/dealership")
+public class DealershipController {
+
+    @Autowired
+    DealershipService service;
+
+    @GetMapping
+    public Flux<Dealership> getAll() { return service.getAll(); }
+
+    @GetMapping("/{id}")
+    public Mono<Dealership> getById(@PathVariable("id") final String id) { return service.getById(id); }
+
+    @PostMapping
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Mono<Dealership> save(@RequestBody final Dealership data) { return service.save(data); }
+
+    @PostMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Mono<Dealership> update(@PathVariable("id") final String id, @RequestBody final Dealership data) { return service.save(data); }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public Mono delete(@PathVariable final String id) { return service.delete(id); }
+
+}
