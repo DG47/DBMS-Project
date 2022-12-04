@@ -4,14 +4,14 @@
     <span>Auto Sales</span>
 
     <div class="central-ctrl">
-      <button class="central-ctrl-btn" (click)="this.router.navigateByUrl('/')" mat-button>
-        Shop
+      <button *ngIf="!admin" class="central-ctrl-btn" (click)="this.router.navigateByUrl('/')" mat-button>
+        Inventory
       </button>
-      <button class="central-ctrl-btn" (click)="this.router.navigateByUrl('/finance')" mat-button>
-        Finance
+      <button *ngIf="admin" class="central-ctrl-btn" (click)="this.router.navigateByUrl('/?admin=true')" mat-button>
+        Inventory
       </button>
-      <button class="central-ctrl-btn" (click)="this.router.navigateByUrl('/locations')" mat-button>
-        Locations
+      <button *ngIf="admin" class="central-ctrl-btn" (click)="this.router.navigateByUrl('/sales?admin=true')" mat-button>
+        Sales
       </button>
     </div>
 
@@ -21,8 +21,5 @@
         <mat-icon svgIcon="github-circle"></mat-icon>
       </button>
     </a>
-    <button mat-icon-button class="icon">
-      <mat-icon>share</mat-icon>
-    </button>
   </mat-toolbar>
 </div>

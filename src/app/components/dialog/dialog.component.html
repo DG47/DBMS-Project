@@ -49,7 +49,7 @@
   </mat-step>
   <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your payment information</ng-template>
+      <ng-template matStepLabel>Finance your {{this.vehicle.model_year + ' - ' + this.vehicle.make + ' ' + this.vehicle.model}}</ng-template>
       <h2>{{this.vehicle.model_year + ' - ' + this.vehicle.make + ' ' + this.vehicle.model}}</h2>
       <h3>{{this.formatMSRP(this.vehicle.price)}}</h3>
       <mat-form-field>
@@ -61,29 +61,31 @@
         </mat-select>
       </mat-form-field><br>
       <mat-form-field appearance="fill">
-        <mat-label>Trade-in Value</mat-label>
-        <input matInput type="number" formControlName="tradeInCtrl" [(ngModel)]="tradeIn" >
-      </mat-form-field><br>
-      <mat-form-field appearance="fill">
         <mat-label>Down Payment</mat-label>
-        <input matInput type="number" formControlName="downPaymentCtrl" [(ngModel)]="downPayment">
+        <input matInput type="number" formControlName="downPaymentCtrl" [(ngModel)]="downPayment" (keyup)="calcPayment()">
       </mat-form-field><br>
-      <h3>Balance remaining {{this.formatRemaining(this.vehicle.price - this.tradeIn - this.downPayment)}}</h3>
+      <h3>Balance remaining {{this.formatRemaining(this.vehicle.price - this.downPayment)}}</h3>
+      <mat-form-field>
+        <mat-label>Preferred lender</mat-label>
+        <mat-select formControlName="lenderCtrl">
+          <mat-option *ngFor="let option of lenderOptions" [value]="option.id">
+            {{option.lender_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Term</mat-label>
+        <mat-select formControlName="termCtrl" [(ngModel)]="termSelected" (selectionChange)="calcPayment()">
+          <mat-option *ngFor="let option of termOptions" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <h3>Loan APY {{this.termRates[termSelected]}}%</h3>
+      <h3>Estimated Monthly Payment: ${{this.estimatedPayment}}</h3>
     </form>
-  </mat-step>
-  <mat-step [stepControl]="thirdFormGroup">
-    <form [formGroup]="thirdFormGroup">
-      <ng-template matStepLabel>Finance your {{this.vehicle.model_year + ' - ' + this.vehicle.make + ' ' + this.vehicle.model}}</ng-template>
-      <h3>Payment remaining {{this.formatRemaining(this.vehicle.price - this.tradeIn - this.downPayment)}}</h3>
-    </form>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="submitSale()">Submit</button>
-    </div>
+    <button mat-button matStepperPrevious>Back</button>
+    <button mat-button (click)="submitSale()">Submit</button>
   </mat-step>
 </mat-stepper>
 </mat-card>

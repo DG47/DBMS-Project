@@ -7,13 +7,12 @@ import {LandingComponent} from "./components/landing/landing.component";
 
 const routes: Routes = [
   { path: '', component: ShopComponent },
-  { path: 'shop', component: ShopComponent },
-  { path: 'finance', component: FinanceComponent },
-  { path: 'locations', component: LocationsComponent }
+  { path: 'inventory', component: ShopComponent },
+  { path: 'sales', component: FinanceComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

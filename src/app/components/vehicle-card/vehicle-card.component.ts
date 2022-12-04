@@ -15,16 +15,13 @@ export class VehicleCardComponent {
   admin:boolean = false;
   @Input() vehicle: any;
 
-  dealershipToggleOptions: any = [];
+
 
   constructor(public dialog: MatDialog, private activatedRoute: ActivatedRoute, private dealership: DealershipService) {
 
   }
 
   ngOnInit(): void {
-    this.dealership.get().subscribe(data => {
-      this.dealershipToggleOptions = data;
-    });
     this.activatedRoute.queryParams.subscribe(params => {
       this.admin = params['admin'] != undefined ? true : false;
     });
@@ -52,7 +49,7 @@ export class VehicleCardComponent {
   openInventoryDialog(): void {
     const dialogRef = this.dialog.open(InventoryDialogComponent, {
       width: 'auto',
-      data: { 'dealshipToggleOptions': this.dealershipToggleOptions, 'edit': true, 'vehicle': this.vehicle },
+      data: { 'edit': true, 'vehicle': this.vehicle },
     });
 
     dialogRef.afterClosed().subscribe(result => {

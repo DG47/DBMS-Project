@@ -1,12 +1,11 @@
 export interface Sales {
   id?:number,
-  vehicle_vin:string,
+  vehicle_sold_id?:number,
   transaction_date?:Date,
-  sales_person_id:number,
-  customer_id:number,
-  dealership_id:number,
+  sales_person_id?:number,
+  customer_id?:number,
+  dealership_id?:number,
   sale_price:number,
-  trade_in_value:number,
   down_payment:number
 }
 

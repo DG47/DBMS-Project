@@ -5,7 +5,7 @@ import {min} from "rxjs";
 import {PageEvent} from "@angular/material/paginator";
 import {DealershipService} from "../../core/service/dealership.service";
 import {Dealership} from "../../core/model/dealership.model";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {DialogComponent} from "../dialog/dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {InventoryDialogComponent} from "../inventory-dialog/inventory-dialog.component";
@@ -22,7 +22,7 @@ export class ShopComponent {
   page: Inventory[] = [];
 
   //pages
-  pageSizeOptions: number[] = [7,14,21];
+  pageSizeOptions: number[] = [6,12,18];
   pageSize: number = this.pageSizeOptions[1];
   pageIndex: number = 0;
   length: number = 0;
@@ -36,6 +36,8 @@ export class ShopComponent {
     {text: 'Mileage Desc', value: 'mileage,desc'}
   ]
   sortBySelected: string = 'invoice_date,desc'
+
+  navigationSubscription: any;
 
   //filters
   makeOptions: string[] = [];
@@ -55,19 +57,17 @@ export class ShopComponent {
   driveToggleOptions: string[] = ["2WD","4WD","AWD"];
   fuelToggle: string[] = [];
   fuelToggleOptions: string[] = ["Gasoline", "Diesel", "Electric"];
+
+
   dealershipToggle: string[] = [];
   dealershipToggleOptions: any = [];
 
 
 
 
-  constructor(private inventory: InventoryService, private dealership: DealershipService, private activatedRoute: ActivatedRoute, public dialog: MatDialog) {
-  }
-
-  ngOnInit(): void {
+  constructor(private inventory: InventoryService, private dealership: DealershipService, private activatedRoute: ActivatedRoute, public dialog: MatDialog, private router: Router) {
     this.activatedRoute.queryParams.subscribe(params => {
       this.admin = params['admin'] != undefined ? true : false;
-      console.log(this.admin);
     });
     this.inventory.getMaxPrice().subscribe(max => { this.maxPriceLimit = max; this.maxPrice = max; });
     this.inventory.getMaxMileage().subscribe(max => { this.maxMileageLimit = max; this.maxMileage = max; });
@@ -80,8 +80,8 @@ export class ShopComponent {
       this.makeOptions.unshift('All');
       this.makeSelected = 'All';
     })
-
   }
+
 
   handlePageEvent(e: PageEvent) {
     this.pageIndex = (this.pageSize == e.pageSize) ? e.pageIndex : 0;
@@ -130,11 +130,8 @@ export class ShopComponent {
       model: "",
       model_year: 0,
       price: 0,
-      sold: false,
       transmission: "",
-      type: "",
       vin: ""
-
     }
     const dialogRef = this.dialog.open(InventoryDialogComponent, {
       width: 'auto',
@@ -142,6 +139,7 @@ export class ShopComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.getData();
       console.log('The dialog was closed');
     });
   }

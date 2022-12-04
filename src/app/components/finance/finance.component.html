@@ -1,1 +1,68 @@
-<p>finance works!</p>
+
+<div style="max-height: 500px; overflow: scroll;">
+
+
+<table border="1">
+
+
+    <tr>
+        <th *ngFor="let attribute of get_keys(column_mapper)" >
+            {{column_mapper[attribute]}}
+        </th>
+    </tr>
+
+
+    <!-- <tr>
+        <th *ngFor="let attribute of get_keys(sales_detail[0])" >
+            {{attribute}}
+        </th>
+    </tr> -->
+
+    <tr *ngFor="let item of sales_detail" >
+        <td  class="myclass"
+        *ngFor="let attribute of get_keys(column_mapper)">
+            {{item[attribute]}}
+        </td>
+    </tr>
+</table>
+
+
+
+
+</div>
+
+<select  [(ngModel)]="option" (change)="switch()">
+    <option [value]="item" *ngFor="let item of options">{{item}}</option>
+</select>
+
+
+<style>
+    table,
+    td,
+    th {
+      padding: 3px;
+      border: 2px solid #ffffff;
+      border-radius: 2px;
+      background-color: #f5f5f5;
+      text-align: center;
+    }
+  </style>
+
+<table border="1">
+
+
+
+    <tr>
+        <th *ngFor="let attribute of get_keys(agg_data[0])" >
+            {{attribute}}
+        </th>
+    </tr>
+
+
+    <tr *ngFor="let item of agg_data" >
+        <td  class="myclass"
+        *ngFor="let attribute of get_keys(item)">
+            {{item[attribute]}}
+        </td>
+    </tr>
+</table>

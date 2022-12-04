@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Inventory} from "../model/inventory.model";
 import {Observable} from "rxjs";
+import {InventorySold} from "../model/inventory-sold.model";
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +59,14 @@ export class InventoryService {
 
   delete(id: string): Observable<unknown> {
     return this.http.delete(this.domain + "/" + id);
+  }
+
+  transfer(data: InventorySold): Observable<InventorySold> {
+    return this.http.post<InventorySold>(this.domain + "-sold/transfer", data);
+  }
+
+  newSale(data: any): Observable<any> {
+    return this.http.post<unknown>(this.domain + "-sold/submit-sale", data);
   }
 
 }
